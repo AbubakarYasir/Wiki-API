@@ -1,0 +1,27 @@
+{
+  "name": "wiki-api",
+  "version": "1.0.0",
+  "description": "a REST Api for Wiki website.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbubakarYasir/Wiki-API.git"
+  },
+  "keywords": [
+    "RESTFUL",
+    "API",
+    "Node.js",
+    "MongoDB",
+    "Back-end",
+    "Server-side"
+  ],
+  "author": "Abubakar Yasir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbubakarYasir/Wiki-API/issues"
+  },
+  "homepage": "https://github.com/AbubakarYasir/Wiki-API#readme"
+}
