@@ -30,7 +30,7 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-const port = 8000;
+const port = 3000;
 app.listen(port, function () {
   console.log("Server Started on http://localhost:" + port);
 });
