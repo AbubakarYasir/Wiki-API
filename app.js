@@ -51,14 +51,9 @@ app.get("/articles", function (req, res) {
 });
 
 // Articles Page (POST Request)
-app.get("/articles", function (req, res) {
-  Article.find({}, function (err, foundArticles) {
-    if (!err) {
-      res.send(foundArticles);
-    } else {
-      res.send(err);
-    }
-  });
+app.post("/articles", function (req, res) {
+  console.log(req.body.title);
+  console.log(req.body.content);
 });
 
 const port = 3000;
