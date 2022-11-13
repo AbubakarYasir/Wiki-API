@@ -39,46 +39,53 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-// Articles Page (GET Request)
-app.get("/articles", function (req, res) {
-  Article.find({}, function (err, foundArticles) {
-    if (!err) {
-      res.send(foundArticles);
-    } else {
-      res.send(err);
-    }
-  });
-});
+// Articles (ROUTE request)
+app
+  .route("/articles")
+  // Articles Page (GET request)
+  .get(function (req, res) {
+    // Find Articles
+    Article.find({}, function (err, foundArticles) {
+      if (!err) {
+        // Send Found Articles
+        res.send(foundArticles);
+      } else {
+        res.send(err);
+      }
+    });
+  })
+  // Articles Page (POST Request)
+  .post(function (req, res) {
+    // Fetch User (New) Article's data
+    articleTitle = req.body.title;
+    articleContent = req.body.content;
 
-// Articles Page (POST Request)
-app.post("/articles", function (req, res) {
-  articleTitle = req.body.title;
-  articleContent = req.body.content;
+    const newArticle = new Article({
+      title: articleTitle,
+      content: articleContent,
+    });
+    // Save the User (New) Article
+    newArticle.save(function (err) {
+      if (!err) {
+        res.send("Successfully added a new article.");
+      } else {
+        res.send(err);
+      }
+    });
+  })
 
-  const newArticle = new Article({
-    title: articleTitle,
-    content: articleContent,
+  // Articles Page (DELETE Request)
+  .delete(function (req, res) {
+    // Delete Articles
+    Article.deleteMany(function (err) {
+      // Delete the Articles
+      if (!err) {
+        res.send("Successfully deleted the article.");
+      } else {
+        res.send(err);
+      }
+    });
   });
-
-  newArticle.save(function (err) {
-    if (!err) {
-      res.send("Successfully added a new article.");
-    } else {
-      res.send(err);
-    }
-  });
-});
-
-// Articles Page (DELETE Request)
-app.delete("/articles", function (req, res) {
-  Article.deleteMany(function (err) {
-    if (!err) {
-      res.send("Successfully deleted the article.");
-    } else {
-      res.send(err);
-    }
-  });
-});
 
 const port = 3000;
 app.listen(port, function () {
