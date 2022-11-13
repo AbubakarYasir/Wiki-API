@@ -69,6 +69,17 @@ app.post("/articles", function (req, res) {
   });
 });
 
+// Articles Page (DELETE Request)
+app.delete("/articles", function (req, res) {
+  Article.deleteMany(function (err) {
+    if (!err) {
+      res.send("Successfully deleted the article.");
+    } else {
+      res.send(err);
+    }
+  });
+});
+
 const port = 3000;
 app.listen(port, function () {
   console.log("Server Started on http://localhost:" + port);
