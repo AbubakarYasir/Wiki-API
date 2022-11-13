@@ -33,13 +33,24 @@ const articleSchema = {
 // Model for Articles
 const Article = mongoose.model("Article", articleSchema);
 
-// Home Page (Request)
+// Home Page (GET Request)
 app.get("/", function (req, res) {
   // Render HOME Page
   res.render("home");
 });
 
-// Articles Page (Request)
+// Articles Page (GET Request)
+app.get("/articles", function (req, res) {
+  Article.find({}, function (err, foundArticles) {
+    if (!err) {
+      res.send(foundArticles);
+    } else {
+      res.send(err);
+    }
+  });
+});
+
+// Articles Page (POST Request)
 app.get("/articles", function (req, res) {
   Article.find({}, function (err, foundArticles) {
     if (!err) {
