@@ -52,8 +52,21 @@ app.get("/articles", function (req, res) {
 
 // Articles Page (POST Request)
 app.post("/articles", function (req, res) {
-  console.log(req.body.title);
-  console.log(req.body.content);
+  articleTitle = req.body.title;
+  articleContent = req.body.content;
+
+  const newArticle = new Article({
+    title: articleTitle,
+    content: articleContent,
+  });
+
+  newArticle.save(function (err) {
+    if (!err) {
+      res.send("Successfully added a new article.");
+    } else {
+      res.send(err);
+    }
+  });
 });
 
 const port = 3000;
