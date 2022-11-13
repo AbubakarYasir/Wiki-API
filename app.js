@@ -24,10 +24,30 @@ mongoose.connect(
   }
 );
 
+// Schema for Articles
+const articleSchema = {
+  title: String,
+  content: String,
+};
+
+// Model for Articles
+const Article = mongoose.model("Article", articleSchema);
+
 // Home Page (Request)
 app.get("/", function (req, res) {
   // Render HOME Page
   res.render("home");
+});
+
+// Articles Page (Request)
+app.get("/articles", function (req, res) {
+  Article.find({}, function (err, foundArticles) {
+    if (!err) {
+      res.send(foundArticles);
+    } else {
+      res.send(err);
+    }
+  });
 });
 
 const port = 3000;
