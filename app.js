@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
-// Articles (ROUTE request)
+// All Articles (ROUTE request)
 app
   .route("/articles")
   // Articles Page (GET request)
@@ -85,6 +85,41 @@ app
         res.send(err);
       }
     });
+  });
+
+// Specific Articles (ROUTE request)
+app
+  .route("/articles/:articleTitle")
+  // Requested Article Page (GET request)
+  .get(function (req, res) {
+    // Find Articles
+    Article.findOne(
+      { title: req.params.articleTitle },
+      function (err, foundArticle) {
+        if (foundArticle) {
+          // Send Found Article
+          res.send(foundArticle);
+        } else {
+          res.send("We couldn't find any articles matching that title!");
+        }
+      }
+    );
+  })
+
+  // Articles Page (DELETE Request)
+  .delete(function (req, res) {
+    // Delete Articles
+    Article.deleteOne(
+      { title: req.params.articleTitle },
+      function (err, foundArticle) {
+        // Delete the Articles
+        if (foundArticle) {
+          res.send("Successfully deleted the article.");
+        } else {
+          res.send("We couldn't find any articles matching that title!");
+        }
+      }
+    );
   });
 
 const port = 3000;
