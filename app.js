@@ -106,9 +106,21 @@ app.route("/articles/:articleTitle")
             function (err) {
                 if (!err) {
                     res.send("Successfully updated the selected article.");
+                } else {
+                    res.send(err);
                 }
             }
         );
+    })
+
+    .patch(function (req, res) {
+        Article.updateOne({ title: req.params.articleTitle }, { $set: req.body }, function (err) {
+            if (!err) {
+                res.send("Successfully updated the selected article.");
+            } else {
+                res.send(err);
+            }
+        });
     })
 
     // Articles Page (DELETE Request)
